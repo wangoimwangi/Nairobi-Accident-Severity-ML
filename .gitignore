@@ -1,0 +1,35 @@
+# Virtual Environment
+venv/
+env/
+
+# Python
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data files (don't commit raw data)
+data/raw/
+*.csv
+*.xlsx
+*.json
+
+# Model files
+models/*.pkl
+models/*.h5
+models/*.joblib
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+get-pip.py
