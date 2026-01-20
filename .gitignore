@@ -1,35 +1,36 @@
-# Virtual Environment
+# Virtual environment
 venv/
-env/
-
-# Python
+env_thesis/
 *.pyc
 __pycache__/
-*.py[cod]
-*$py.class
 
-# Jupyter Notebooks
+# Jupyter Notebook
 .ipynb_checkpoints/
-*.ipynb_checkpoints
+*/.ipynb_checkpoints/*
 
-# Data files (don't commit raw data)
-data/raw/
-*.csv
-*.xlsx
-*.json
+# Data files (exclude large CSV files)
+data/raw/*.csv
+data/raw/**/*.csv
+data/processed/*.csv
 
-# Model files
-models/*.pkl
-models/*.h5
-models/*.joblib
+# Python
+*.egg-info/
+dist/
+build/
+*.so
 
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
 
 # OS
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Temporary files
+*.tmp
+*.log
 get-pip.py
