@@ -7,6 +7,8 @@ __pycache__/
 # Jupyter Notebook
 .ipynb_checkpoints/
 */.ipynb_checkpoints/*
+notebooks/cache/
+.ipynb_checkpoints/
 
 # Data files (exclude large CSV files)
 data/raw/*.csv
@@ -34,3 +36,82 @@ Desktop.ini
 *.tmp
 *.log
 get-pip.py
+
+
+# ML models and artifacts
+*.joblib
+*.pkl
+data/processed/
+notebooks/models/
+
+
+# =============================================
+
+# NumPy array files 
+*.npy
+*.npz
+data/features/*.npy
+data/features/*.npz
+
+# CSV files (already in data/ but be specific)
+data/features/*.csv
+data/features/test.csv
+data/features/train_balanced.csv
+data/features/validation.csv
+
+# Any other feature files
+data/features/X_*
+data/features/y_*
+
+# Model files
+models/
+*.pth
+*.h5
+*.hdf5
+*.model
+
+# Training artifacts
+checkpoints/
+runs/
+logs/
+wandb/
+
+# Large files generally
+*.zip
+*.tar.gz
+*.7z
+*.rar
+
+
+# Large model files (241MB each!)
+notebooks/models/
+models/
+*.joblib
+*.pkl
+*.pth
+*.h5
+*.hdf5
+
+# NumPy array files
+*.npy
+*.npz
+
+# All feature files
+data/features/
+
+# Cache and temp files
+__pycache__/
+*.cache
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.tox/
+.nox/
+
+
+notebooks/models/
+*.joblib
+models/
