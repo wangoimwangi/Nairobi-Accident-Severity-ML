@@ -225,20 +225,20 @@ with col_right:
     
     accident_datetime = datetime.combine(accident_date, accident_time)
     
-    st.info(f"** {accident_datetime.strftime('%Y-%m-%d')}**")
-    st.info(f"** {accident_datetime.strftime('%H:%M')}**")
-    
-    # Show temporal risk factors
+    # Show temporal risk factors (more compact)
     temporal = extract_temporal_features(accident_datetime)
-    
-    st.markdown("** Time Factors:**")
+
+    risk_badges = []
     if temporal['is_rush_hour']:
-        st.warning(" Rush Hour")
-    if temporal['is_weekend']:
-        st.info(" Weekend")
+        risk_badges.append(" Rush Hour")
     if temporal['is_night']:
-        st.info(" Night Time")
-    if not (temporal['is_rush_hour'] or temporal['is_weekend'] or temporal['is_night']):
+        risk_badges.append(" Night Time")
+    if temporal['is_weekend']:
+        risk_badges.append(" Weekend")
+
+    if risk_badges:
+        st.warning(" | ".join(risk_badges))
+    else:
         st.success(" Regular hours")
 
 # ----------------------------------------------------------------------------
@@ -292,10 +292,11 @@ predict_col1, predict_col2, predict_col3 = st.columns([1, 2, 1])
 
 with predict_col2:
     predict_button = st.button(
-        "PREDICT SEVERITY",
+        " PREDICT SEVERITY",
         type="primary",
         use_container_width=True
     )
+    st.caption("Tip: Complete all fields and click above")
 
 
 
@@ -379,84 +380,108 @@ if st.session_state.prediction_made and st.session_state.prediction_result:
             </div>
         """, unsafe_allow_html=True)
     
+
     # Recommended actions
-    st.subheader(" Recommended Actions")
+    st.subheader("Recommended Actions")
     actions = RECOMMENDED_ACTIONS[severity]
-    
+
     for action in actions:
         if severity == 1:
             st.error(f"• {action}")
         else:
             st.success(f"• {action}")
-    
+
+
+    # Collapse detailed analysis into expander
+    st.markdown("---")
+    with st.expander("View Detailed Analysis (Optional)", expanded=False):
+
+
     # Confidence visualization
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.subheader(" Confidence Level")
+        col1, col2 = st.columns(2)
         
-        fig_gauge = go.Figure(go.Indicator(
-        mode="gauge+number",
-        value=confidence,
-        title={'text': "Confidence (%)", 'font': {'color': 'white'}},
-        number={'font': {'size': 40, 'color': 'white'}},  # Make number visible
-        gauge={
-            'axis': {'range': [0, 100], 'tickcolor': 'white', 'tickfont': {'color': 'white'}},
-            'bar': {'color': SEVERITY_COLORS[severity]},
-            'steps': [
-                {'range': [0, 50], 'color': "lightgray"},
-                {'range': [50, 75], 'color': "lightblue"},
-                {'range': [75, 100], 'color': "lightgreen"}
-            ]
-        }
-    ))
-    fig_gauge.update_layout(height=250, paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)')
-    
-    with col2:
-        st.subheader(" Probabilities")
+        with col1:
+            st.subheader("Confidence Level")
+            
+            fig_gauge = go.Figure(go.Indicator(
+                mode="gauge+number",
+                value=confidence,
+                title={'text': "Confidence (%)"},
+                number={'font': {'size': 40}},
+                gauge={
+                    'axis': {'range': [0, 100]},
+                    'bar': {'color': SEVERITY_COLORS[severity]},
+                    'steps': [
+                        {'range': [0, 50], 'color': "lightgray"},
+                        {'range': [50, 75], 'color': "lightblue"},
+                        {'range': [75, 100], 'color': "lightgreen"}
+                    ],
+                    'threshold': {
+                        'line': {'color': "red", 'width': 4},
+                        'thickness': 0.75,
+                        'value': 90
+                    }
+                }
+            ))
+            
+            fig_gauge.update_layout(
+                height=200,
+                margin=dict(l=10, r=10, t=40, b=10)
+            )
+            
+            st.plotly_chart(fig_gauge, use_container_width=True)
         
-        prob_df = pd.DataFrame({
-            'Severity': ['LOW', 'HIGH'],
-            'Probability': result['probabilities'] * 100
-        })
-        
-        fig_bar = px.bar(
-            prob_df, x='Severity', y='Probability',
-            color='Severity',
-            color_discrete_map={'LOW': 'green', 'HIGH': 'red'},
-            text='Probability'
-        )
-        fig_bar.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
-        fig_bar.update_layout(showlegend=False, height=250)
-        st.plotly_chart(fig_bar, use_container_width=True)
+
+
+        with col2:
+            st.subheader("Probabilities")
+            
+            prob_df = pd.DataFrame({
+                'Severity': ['LOW', 'HIGH'],
+                'Probability': result['probabilities'] * 100
+            })
+            
+            fig_bar = px.bar(
+                prob_df, x='Severity', y='Probability',
+                color='Severity',
+                color_discrete_map={'LOW': 'green', 'HIGH': 'red'},
+                text='Probability'
+            )
+            fig_bar.update_traces(texttemplate='%{text:.1f}%', textposition='outside')
+            fig_bar.update_layout(
+                showlegend=False, 
+                height=200,
+                margin=dict(l=10, r=10, t=10, b=10)
+            )
+            st.plotly_chart(fig_bar, use_container_width=True)
     
-    
+
     # Feature importance
-    st.subheader("Key Risk Factors")
+        st.subheader("Key Risk Factors")
+        
+        fig_features = px.bar(
+            result['top_features'],
+            x='importance', y='feature', orientation='h',
+            color='importance',
+            color_continuous_scale='Reds' if severity == 1 else 'Greens'
+        )
+        fig_features.update_layout(
+            yaxis={'categoryorder': 'total ascending'},
+            height=200,
+            showlegend=False,
+            margin=dict(l=10, r=10, t=10, b=10)
+        )
+        st.plotly_chart(fig_features, use_container_width=True)
     
-    fig_features = px.bar(
-        result['top_features'],
-        x='importance', y='feature', orientation='h',
-        color='importance',
-        color_continuous_scale='Reds' if severity == 1 else 'Greens'
-    )
-    fig_features.update_layout(
-        yaxis={'categoryorder': 'total ascending'},
-        height=250,
-        showlegend=False
-    )
-    st.plotly_chart(fig_features, use_container_width=True)
-    
-    # Explanation
-    st.info("""
-    **Understanding This Prediction:**
-    - Higher confidence (>75%) = more certain prediction
-    - Lower confidence (<60%) = borderline case, use extra caution
-    - Risk factors show which features influenced this prediction
-    - Always combine with caller information and your judgment
-    """)
 
-
+        # Explanation
+        st.info("""
+        **Understanding This Prediction:**
+        - Higher confidence (>75%) = more certain prediction
+        - Lower confidence (<60%) = borderline case, use extra caution
+        - Risk factors show which features influenced this prediction
+        - Always combine with caller information and your judgment
+        """)
 
 # ============================================================================
 # FOOTER
