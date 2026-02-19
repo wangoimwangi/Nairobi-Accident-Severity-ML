@@ -6,7 +6,7 @@ Supervisor: Prof. Vincent Omwenga
 import os
 
 # Resolve paths from project root so app works from any launch directory
-PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MODEL_DIR    = os.path.join(PROJECT_ROOT, 'models', 'final_model')
 
 
