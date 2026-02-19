@@ -145,4 +145,4 @@ $RECYCLE.BIN/
 # PROJECT-SPECIFIC
 # ============================================================================
 get-pip.py
-src/app/.streamlit/
+# src/app/.streamlit/  # Allow config.toml
