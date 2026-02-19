@@ -1,0 +1,14 @@
+{
+  "weights": {
+    "rf": 0.33,
+    "xgboost": 0.33,
+    "lgbm": 0.34
+  },
+  "threshold": 0.13,
+  "date_saved": "2026-02-17 14:41",
+  "val_recall": 0.8124,
+  "val_under_triage": 18.76,
+  "test_recall": 0.7942,
+  "test_under_triage": 20.58,
+  "test_auc": 0.6327
+}

@@ -1,0 +1,40 @@
+{
+  "validation_set": {
+    "accuracy": 0.5200086058519794,
+    "roc_auc": 0.613616078702389,
+    "high_precision": 0.15739202657807308,
+    "high_recall": 0.6523235800344234,
+    "high_f1_score": 0.2535965205754433,
+    "under_triage_rate": 34.76764199655766,
+    "confusion_matrix": {
+      "true_negatives": 2038,
+      "false_positives": 2029,
+      "false_negatives": 202,
+      "true_positives": 379
+    }
+  },
+  "test_set": {
+    "accuracy": 0.5311158798283262,
+    "roc_auc": 0.6249331584830773,
+    "high_precision": 0.15885860306643954,
+    "high_recall": 0.6397941680960549,
+    "high_f1_score": 0.2545206414193108,
+    "under_triage_rate": 36.02058319039451,
+    "over_triage_rate": 48.44248221731666,
+    "confusion_matrix": {
+      "true_negatives": 2102,
+      "false_positives": 1975,
+      "false_negatives": 210,
+      "true_positives": 373
+    }
+  },
+  "generalization": {
+    "recall_difference": 0.012529411938368429,
+    "generalization_quality": "Excellent",
+    "overfitting_detected": false
+  },
+  "baseline_comparison": {
+    "logistic_regression_recall": 0.22203098106712565,
+    "improvement_percentage": 188.15535787892085
+  }
+}

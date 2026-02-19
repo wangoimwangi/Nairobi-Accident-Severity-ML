@@ -1,117 +1,148 @@
-# Virtual environment
-venv/
-env_thesis/
-*.pyc
-__pycache__/
+# ============================================================================
+# .gitignore for Nairobi Accident Severity ML Thesis Project
+# ============================================================================
 
-# Jupyter Notebook
+# ============================================================================
+# PYTHON
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.manifest
+*.spec
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# ============================================================================
+# VIRTUAL ENVIRONMENTS
+# ============================================================================
+venv/
+env/
+env_thesis/
+ENV/
+env.bak/
+venv.bak/
+
+# ============================================================================
+# JUPYTER NOTEBOOK
+# ============================================================================
 .ipynb_checkpoints/
 */.ipynb_checkpoints/*
+**/.ipynb_checkpoints/
 notebooks/cache/
-.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+*.ipynb_checkpoints
 
-# Data files (exclude large CSV files)
+# ============================================================================
+# DATA FILES
+# ============================================================================
 data/raw/*.csv
 data/raw/**/*.csv
+data/raw/*.pkl
 data/processed/*.csv
-
-# Python
-*.egg-info/
-dist/
-build/
-*.so
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# OS
-.DS_Store
-Thumbs.db
-Desktop.ini
-
-# Temporary files
-*.tmp
-*.log
-get-pip.py
-
-
-# ML models and artifacts
-*.joblib
-*.pkl
-data/processed/
-notebooks/models/
-
-
-# =============================================
-
-# NumPy array files 
-*.npy
-*.npz
+data/processed/*.pkl
+data/features/*.csv
+data/features/*.pkl
 data/features/*.npy
 data/features/*.npz
-
-# CSV files (already in data/ but be specific)
-data/features/*.csv
-data/features/test.csv
-data/features/train_balanced.csv
-data/features/validation.csv
-
-# Any other feature files
 data/features/X_*
 data/features/y_*
+!data/features/feature_metadata.pkl
 
-# Model files
-models/
-*.pth
-*.h5
-*.hdf5
-*.model
-
-# Training artifacts
+# ============================================================================
+# MACHINE LEARNING MODELS
+# ============================================================================
+models/*.pkl
+models/*.joblib
+models/*.pth
+models/*.h5
+models/*.hdf5
+models/*.model
+!models/ensemble_config.json
+!models/model_config.json
+!models/performance_metrics.json
+!models/feature_names.json
+!models/feature_importance.csv
+notebooks/models/
 checkpoints/
 runs/
 logs/
 wandb/
 
-# Large files generally
+# ============================================================================
+# IDE / EDITOR
+# ============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.code-workspace
+*.sublime-project
+*.sublime-workspace
+
+# ============================================================================
+# OPERATING SYSTEM
+# ============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+.directory
+.Trash-*
+
+# ============================================================================
+# TEMPORARY / CACHE FILES
+# ============================================================================
+*.tmp
+*.log
+*.bak
+*.swp
+*.cache
+.mypy_cache/
+
+# ============================================================================
+# ARCHIVES
+# ============================================================================
 *.zip
 *.tar.gz
 *.7z
 *.rar
+*.gz
 
-
-# Large model files (241MB each!)
-notebooks/models/
-models/
-*.joblib
-*.pkl
-*.pth
-*.h5
-*.hdf5
-
-# NumPy array files
-*.npy
-*.npz
-
-# All feature files
-data/features/
-
-# Cache and temp files
-__pycache__/
-*.cache
-.mypy_cache/
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Jupyter
-.tox/
-.nox/
-
-
-notebooks/models/
-*.joblib
-models/
+# ============================================================================
+# PROJECT-SPECIFIC
+# ============================================================================
+get-pip.py
+src/app/.streamlit/

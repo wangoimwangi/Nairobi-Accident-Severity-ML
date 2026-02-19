@@ -1,218 +1,196 @@
-# Data Exploration Summary: Road Traffic Crashes 2012-2023
-**Date:** January 27, 2026  
+# Data Exploration Summary: Ma3Route Traffic Crashes Dataset
+
 **Student:** Mary Wangoi Mwangi (122174)  
-**Supervisor:** Prof. Vincent Omwenga
-
-
-
-## Executive Summary
-
-Successfully acquired and explored the Ma3Route Road Traffic Crashes dataset (2012-2023), containing **31,064 georeferenced crash records** spanning 10.9 years. The dataset demonstrates exceptional quality with **100% GPS coverage** and **zero missing values**, making it ideal for machine learning-based severity prediction.
-
-
-
-## Dataset Overview
-
-### Basic Statistics
-- **Total Records:** 31,064 crash incidents
-- **Time Period:** August 8, 2012 - July 12, 2023 (10.9 years)
-- **Geographic Coverage:** Nairobi region (Lat: -3.10 to -0.57, Lon: 36.28 to 37.88)
-- **GPS Coverage:** 100% (all records have valid coordinates)
-- **Missing Values:** 0% (complete dataset)
-
-### Data Structure
-- **10 Variables:** crash_id, crash_datetime, crash_date, latitude, longitude, n_crash_reports, contains_fatality_words, contains_pedestrian_words, contains_matatu_words, contains_motorcycle_words
-- **Data Source:** World Bank Microdata Library
-- **Collection Method:** Crowdsourced reports from Ma3Route platform
-- **Validation:** Algorithm-coded (Milusheva et al., 2021) with 92% verification accuracy
-
-
-
-## Severity Classification
-
-### Methodology
-Severity levels derived from keyword analysis of crash reports:
-- **FATAL:** Contains death-related keywords ('dead', 'died', 'killed', 'fatal', 'body')
-- **SEVERE:** Involves vulnerable road users (pedestrians, motorcycles)
-- **MODERATE:** Involves public transport (matatus)
-- **MINOR:** None of the above
-
-### Severity Distribution
-
-| Severity | Count | Percentage |
-|----------|-------|------------|
-| **MINOR** | 25,059 | 80.7% |
-| **FATAL** | 2,284 | 7.4% |
-| **MODERATE** | 2,121 | 6.8% |
-| **SEVERE** | 1,600 | 5.2% |
-
-**Class Balance Assessment:** The distribution shows reasonable balance for machine learning, with 19.3% of crashes classified as moderate-to-fatal severity. This is sufficient for training robust classification models.
-
-
-
-## Severity Indicators Analysis
-
-| Indicator | Count | Percentage | Interpretation |
-|-----------|-------|------------|----------------|
-| Fatality keywords | 2,284 | 7.35% | Clear marker for fatal crashes |
-| Pedestrian involvement | 944 | 3.04% | Vulnerable road user crashes |
-| Matatu involvement | 2,541 | 8.18% | Public transport safety concern |
-| Motorcycle involvement | 1,142 | 3.68% | High-risk vehicle type |
-
-
-
-## Temporal Patterns
-
-### Crashes by Year
-
-| Year | Crashes | Notes |
-|------|---------|-------|
-| 2012 | 310 | Partial year (started Aug) |
-| 2013 | 1,398 | - |
-| 2014 | 4,014 | Increasing trend |
-| **2015** | **6,101** | **Peak year** |
-| 2016 | 4,219 | - |
-| 2017 | 2,698 | Declining trend begins |
-| 2018 | 3,194 | - |
-| 2019 | 2,739 | - |
-| 2020 | 1,928 | COVID-19 impact likely |
-| 2021 | 1,937 | - |
-| 2022 | 1,805 | - |
-| 2023 | 721 | Partial year (Jan-Jul) |
-
-**Key Observation:** Peak crash reporting in 2015 (6,101 crashes), followed by sustained decline. The 2020-2021 reduction likely reflects COVID-19 lockdown effects on traffic.
-
-### Hourly Crash Patterns
-- **Morning peak:** 8:00 AM (rush hour)
-- **Evening peak:** 6:00 PM (rush hour)
-- **Lowest:** 4:00 AM (minimal traffic)
-
-**Implication:** Crash severity prediction models should incorporate time-of-day features, particularly rush hour indicators.
-
-
-
-## Geographic Coverage
-
-- **100% GPS coverage** - All 31,064 crashes have valid coordinates
-- **Coverage area:** Primarily Nairobi metropolitan region
-- **Spatial distribution:** Dense clustering in central Nairobi with crashes spread across major road networks
-- **Hotspot identification:** Clear geographic patterns visible, enabling location-based severity features
-
-**Comparison to Previous Dataset:**
-- Old dataset (2017-2018): 44% GPS coverage (4,191/9,479)
-- New dataset (2012-2023): **100% GPS coverage** (31,064/31,064)
-- **Improvement:** +56 percentage points in GPS data availability
-
-
-
-## Data Quality Assessment
-
-### Strengths 
-1. **Complete GPS coverage** (100%) - enables robust location-based features
-2. **Zero missing values** - no need for imputation
-3. **Large sample size** (31,064) - sufficient for ML training
-4. **Long timeframe** (10.9 years) - captures seasonal and yearly patterns
-5. **Validated methodology** - algorithm verified at 92% accuracy (Milusheva et al., 2021)
-6. **Multiple severity proxies** - fatality, pedestrian, vehicle type keywords
-
-### Limitations 
-1. **Crowdsourced data bias** - may overrepresent visible crashes on major roads
-2. **Keyword-based severity** - not clinical assessment (but aligns with WHO principles)
-3. **Declining reports after 2015** - potential platform usage changes
-4. **No injury count data** - severity inferred from keywords only
-
-### Mitigation Strategies
-- Use cross-validation to assess model generalization
-- Compare algorithm-coded (31,064) with manual-coded subset (2,595) for validation
-- Acknowledge limitations transparently in thesis methodology section
-- Focus on relative severity (comparative) rather than absolute clinical severity
-
-
-
-## Comparison with Related Research
-
-| Study | Location | Sample Size | Severity Classes | Our Dataset |
-|-------|----------|-------------|------------------|-------------|
-| Getachew et al. (2025) | Ethiopia | 2,000 | 2 (fatal/non-fatal) | **31,064** |
-| Mussa et al. (2020) | Addis Ababa | 2,000+ | 3 classes | **31,064** |
-| Wang et al. (2023) | Singapore | 360,000 calls | Binary | **31,064 + severity** |
-
-**Competitive Advantage:** Our dataset size exceeds similar African studies while providing multi-class severity labels.
+**Supervisor:** Prof. Vincent Omwenga  
+**Date:** February 2026  
+**Program:** MSc Information Technology, Strathmore University
 
 ---
 
-## Next Steps
+## Key Steps Performed
 
-### Immediate (This Week)
-1. ✅ Dataset acquired and explored
-2. ✅ Severity classification implemented
-3. ⏳ Feature engineering (temporal, spatial, historical features)
-4. ⏳ Data preprocessing for ML (normalization, encoding)
+1. Dataset acquisition from World Bank Microdata Library
+2. Initial data quality assessment (completeness, GPS coverage)
+3. Severity classification using keyword analysis
+4. Temporal pattern analysis (yearly, monthly, hourly trends)
+5. Geographic coverage verification
+6. Class distribution analysis for ML readiness
+7. Comparative benchmarking against related studies
 
-### Short-term (Next 2 Weeks)
-5. Model development (Random Forest, Gradient Boosting, Logistic Regression)
-6. Hyperparameter tuning and cross-validation
-7. Model evaluation and comparison
+---
 
-### Medium-term (Next 4 Weeks)
-8. Results analysis and interpretation
-9. Thesis writing (methodology, results, discussion chapters)
-10. Prepare for final defense
+## Dataset Overview
 
+**Source:** World Bank Ma3Route Nairobi Crash Dataset (2012-2023)  
+**Total Records:** 31,064 georeferenced crash incidents  
+**Time Span:** 10.9 years (August 2012 - July 2023)  
+**GPS Coverage:** 100% (all records have valid coordinates)  
+**Missing Values:** 0% (complete dataset)  
+**Collection Method:** Crowdsourced via Ma3Route platform  
+**Validation:** 92% verification accuracy (Milusheva et al., 2021)
 
+### Geographic Scope
+- **Primary Coverage:** Nairobi metropolitan region
+- **Latitude Range:** -3.10 to -0.57
+- **Longitude Range:** 36.28 to 37.88
+- **Spatial Distribution:** Dense clustering in central Nairobi with coverage across major road networks
+
+---
+
+## Severity Classification Methodology
+
+Severity levels derived from keyword analysis of crash reports following WHO severity principles:
+
+| Severity | Definition | Count | % |
+|----------|-----------|-------|---|
+| **FATAL** | Contains death keywords ('killed', 'fatal', 'died') | 2,284 | 7.4% |
+| **SEVERE** | Involves vulnerable road users (pedestrians, motorcycles) | 1,600 | 5.2% |
+| **MODERATE** | Involves public transport (matatus) | 2,121 | 6.8% |
+| **MINOR** | None of the above | 25,059 | 80.7% |
+
+**Binary Classification for ML Model:**
+- **HIGH Severity:** Fatal + Severe = 3,884 (12.5%)
+- **LOW Severity:** Moderate + Minor = 27,180 (87.5%)
+
+**Class Balance:** The 12.5% minority class provides sufficient samples for SMOTE-enhanced training.
+
+---
+
+## Key Findings
+
+### Data Quality Strengths
+ **100% GPS coverage** - Enables robust location-based features  
+ **Zero missing values** - No imputation required  
+ **Large sample size** (31,064) - Exceeds comparable African studies (Ethiopia: 2,000; Addis Ababa: 2,000+)  
+ **Long timeframe** (10.9 years) - Captures seasonal and long-term patterns  
+ **Multiple severity proxies** - Fatality, pedestrian, matatu, motorcycle keywords
+
+### Temporal Patterns Identified
+- **Peak reporting year:** 2015 (6,101 crashes)
+- **Declining trend:** 2016-2023 (possible platform usage changes or safety improvements)
+- **COVID-19 impact:** 2020 shows notable reduction (1,928 crashes)
+- **Hourly peaks:** 8:00 AM and 6:00 PM (rush hours)
+- **Lowest activity:** 4:00 AM (minimal traffic)
+
+**Implication:** Time-of-day, day-of-week, and rush-hour indicators are critical features for ML model.
+
+### Geographic Characteristics
+- Central Nairobi shows highest crash density
+- Major road networks clearly identifiable in spatial distribution
+- Geographic hotspots enable location-based severity features
+- Distance from CBD emerged as strong predictor candidate
+
+---
+
+## Data Quality Limitations
+
+**Crowdsourced data bias** - May overrepresent visible crashes on major roads; nighttime/informal settlement incidents likely underreported  
+**Keyword-based severity** - Not clinical assessment; lacks detailed injury counts  
+**Platform usage decline** - Post-2015 reduction may affect temporal feature reliability  
+
+### Mitigation Strategies
+- Cross-validation to assess generalization across time periods
+- Transparent limitation acknowledgment in thesis methodology
+- Focus on relative severity (comparative risk) rather than absolute clinical severity
+- Bias detection analysis during feature engineering phase
+
+---
+
+## Comparison with Related Research
+
+| Study | Location | Sample Size | Severity Classes | GPS Coverage |
+|-------|----------|-------------|------------------|--------------|
+| **Current Dataset** | **Nairobi** | **31,064** | **4 classes → 2 binary** | **100%** |
+| Getachew et al. (2025) | Ethiopia | 2,000 | 2 (fatal/non-fatal) | Not specified |
+| Mussa et al. (2020) | Addis Ababa | 2,000+ | 3 classes | Not specified |
+| Wang et al. (2023) | Singapore | 360,000 calls | Binary triage | N/A (call data) |
+
+**Competitive Position:** Current dataset size significantly exceeds comparable African studies while providing complete GPS coverage and multi-class severity labels.
+
+---
+
+## Severity Indicator Analysis
+
+| Indicator | Records | % of Total | Interpretation |
+|-----------|---------|------------|----------------|
+| **Fatality keywords** | 2,284 | 7.4% | Clear fatal crash marker |
+| **Pedestrian involvement** | 944 | 3.0% | Vulnerable road user risk |
+| **Matatu involvement** | 2,541 | 8.2% | Public transport safety concern |
+| **Motorcycle involvement** | 1,142 | 3.7% | High-risk vehicle type |
+
+---
+
+## ML Readiness Assessment
+
+### Dataset Suitability
+ **Sufficient sample size** - 31,064 records exceed typical ML training requirements  
+ **Complete features** - No missing data preprocessing needed  
+ **Balanced minority class** - 12.5% HIGH severity sufficient for SMOTE  
+ **Geographic variance** - Spatial diversity supports location-based features  
+ **Temporal coverage** - 10.9 years captures seasonal patterns
+
+### Feature Engineering Opportunities Identified
+1. **Temporal:** Hour, day, month, rush hour flags, weekend indicators
+2. **Spatial:** Distance from CBD, crash density by location, road network proximity
+3. **Historical:** Location-specific severity rates, temporal severity trends
+4. **Categorical:** Vehicle type involvement, vulnerable road user presence
+
+---
 
 ## Technical Implementation
 
-### Tools & Libraries
-- **Python 3.x** with pandas, numpy, scikit-learn
-- **Visualization:** matplotlib, seaborn
-- **Geospatial:** geopandas (if needed for advanced spatial analysis)
-- **Development:** Jupyter Notebooks, VS Code, Git
+**Tools Used:**
+- Python 3.x (pandas, numpy, scikit-learn)
+- Visualization: matplotlib, seaborn, plotly
+- Geospatial: geopandas (for spatial analysis)
+- Development: Jupyter Notebooks, Git version control
 
-### Repository Structure
-
-Nairobi-Accident-Severity/
+**Repository Structure:**
+```
+NAIROBI-ACCIDENT-SEVERITY/
 ├── data/
-│   ├── raw/                    # Original datasets
-│   └── processed/              # Cleaned data with severity labels
+│   ├── raw/              # Original Ma3Route dataset
+│   └── processed/        # Cleaned data with severity labels
 ├── notebooks/
-│   └── 02_new_dataset_exploration.ipynb
+│   └── 01_data_exploration.ipynb
+├── models/               # Trained ensemble models
 ├── reports/
-│   └── figures/                # Visualizations
-└── src/                        # Python modules (future)
+│   └── figures/          # Visualizations
+└── docs/                 # Documentation summaries
 ```
 
+---
 
+## Key Decisions Made
 
-## Preliminary Findings
+1. **Binary Classification Adopted:** HIGH (Fatal+Severe) vs LOW (Moderate+Minor) for clearer emergency dispatch decisions
+2. **Keyword-Based Severity Accepted:** Despite limitations, aligns with WHO severity principles and provides consistent labeling
+3. **Full Dataset Utilized:** All 31,064 records used (2012-2023) to maximize training data despite post-2015 decline
+4. **GPS Completeness Verified:** 100% coverage confirmed critical for spatial feature engineering
 
-1. **Dataset Quality Exceeds Expectations**
-   - 100% GPS coverage 
-   - Zero missing values simplifies preprocessing pipeline
-
-2. **Severity Distribution is ML-Friendly**
-   - 19.3% severe/moderate/fatal crashes provides sufficient minority class samples
-   - May still require SMOTE for optimal model training
-
-3. **Clear Temporal Patterns**
-   - Rush hour peaks align with expected traffic patterns
-   - Yearly decline suggests possible safety improvements or reporting changes
-
-4. **Geographic Hotspots Identifiable**
-   - Central Nairobi shows highest density
-   - Location-based features will be strong predictors
-
+---
 
 ## Conclusion
 
-The Ma3Route Road Traffic Crashes dataset (2012-2023) **exceeds requirements** for the thesis research. With 31,064 complete records, 100% GPS coverage, and clear severity indicators, we can proceed confidently to feature engineering and model development. The dataset's quality eliminates anticipated data cleaning challenges, potentially accelerating the research timeline.
+The Ma3Route dataset (2012-2023) **exceeds requirements** for ML-based severity prediction research. With 31,064 complete records, 100% GPS coverage, and clear severity indicators, the dataset eliminates anticipated data cleaning challenges.
 
-**Status:** ✅ **Ready to proceed with feature engineering and model development**
+**Key Advantages:**
+- Largest traffic crash dataset for East African ML research
+- Complete geographic information enables robust spatial features
+- 10.9-year timeframe captures long-term patterns
+- Validated methodology (92% accuracy) provides credible ground truth
 
+**Status:**  **Ready for feature engineering and model development**
 
+---
 
-**Prepared by:** Mary Wangoi Mwangi  
-**Student ID:** 122174  
-**Date:** January 27, 2026  
-**Supervisor:** Prof. Vincent Omwenga  
-**Program:** MSc Information Technology, Strathmore University
+**Next Steps:**
+1. Feature engineering (temporal, spatial, weather integration)
+2. Model development (Random Forest ensemble)
+3. Cross-validation and performance evaluation
+4. Threshold optimization for safety-first dispatch
+
+---
+
+*Report prepared as part of MSc IT thesis requirements*  
+*Strathmore University School of Computing & Engineering Sciences*
