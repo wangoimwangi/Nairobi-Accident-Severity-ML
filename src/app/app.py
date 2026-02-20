@@ -18,6 +18,9 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from datetime import datetime
+import pytz
+n# Nairobi timezone for consistent time handling
+NAIROBI_TZ = pytz.timezone("Africa/Nairobi")
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -98,8 +101,8 @@ st.markdown("""
 for key, val in [('prediction_made', False),
                 ('prediction_result', None),
                 ('weather_data', None),
-                ('selected_date', None),
-                ('selected_time', None)]:
+                ('selected_date', datetime.now(NAIROBI_TZ).date()),
+                ('selected_time', datetime.now(NAIROBI_TZ).time())]:
     if key not in st.session_state:
         st.session_state[key] = val
 
@@ -216,11 +219,11 @@ with col_time:
     st.caption("Auto-filled with current date and time. Adjust if the accident occurred earlier.")
     
     # Date input with session state
-    accident_date = st.date_input("Date", value=st.session_state.selected_date or datetime.now().date(), key="date_input")
+    accident_date = st.date_input("Date", value=st.session_state.selected_date or datetime.now(NAIROBI_TZ).date(), key="date_input")
     st.session_state.selected_date = accident_date
     
     # Time input with session state - prevents automatic reset to current time
-    accident_time = st.time_input("Time", value=st.session_state.selected_time or datetime.now().time(), key="time_input")
+    accident_time = st.time_input("Time", value=st.session_state.selected_time or datetime.now(NAIROBI_TZ).time(), key="time_input")
     st.session_state.selected_time = accident_time
     
     accident_dt = datetime.combine(accident_date, accident_time)
