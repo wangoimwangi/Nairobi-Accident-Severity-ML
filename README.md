@@ -12,7 +12,9 @@ Machine learning-based decision support system for predicting traffic accident s
 
 ##  Project Overview
 
-This research develops an ensemble machine learning model (Random Forest + XGBoost + LightGBM) that predicts accident severity using only GPS coordinates and timestamp data from emergency callers. The system addresses a critical 35% resource mismatch in Nairobi's fragmented emergency dispatch system by providing objective severity assessments.
+This research develops an ensemble machine learning model (Random Forest + XGBoost + LightGBM) that predicts accident severity by requiring only GPS coordinates and timestamp from emergency callers, then automatically deriving 44 predictive features including temporal patterns, spatial risk factors, historical crash data, and real-time weather conditions. 
+
+The system addresses a critical 35% resource mismatch in Nairobi's fragmented emergency dispatch system by providing objective severity assessments without burdening callers for additional information.
 
 **Key Achievement:** 79.42% HIGH severity recall with 20.58% under-triage rate on test data.
 
@@ -173,7 +175,7 @@ Comprehensive documentation available in `/docs/`:
 
 This work is submitted in partial fulfillment of the requirements for the degree of Master of Science in Information Technology at Strathmore University, School of Computing & Engineering Sciences.
 
-**Thesis Defense:** April 2026
+**Thesis Defense:** March 2026
 
 ---
 

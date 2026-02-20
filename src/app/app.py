@@ -98,8 +98,8 @@ st.markdown("""
 for key, val in [('prediction_made', False),
                 ('prediction_result', None),
                 ('weather_data', None),
-                ('selected_date', datetime.now().date()),
-                ('selected_time', datetime.now().time())]:
+                ('selected_date', None),
+                ('selected_time', None)]:
     if key not in st.session_state:
         st.session_state[key] = val
 
@@ -216,11 +216,11 @@ with col_time:
     st.caption("Auto-filled with current date and time. Adjust if the accident occurred earlier.")
     
     # Date input with session state
-    accident_date = st.date_input("Date", value=st.session_state.selected_date, key="date_input")
+    accident_date = st.date_input("Date", value=st.session_state.selected_date or datetime.now().date(), key="date_input")
     st.session_state.selected_date = accident_date
     
     # Time input with session state - prevents automatic reset to current time
-    accident_time = st.time_input("Time", value=st.session_state.selected_time, key="time_input")
+    accident_time = st.time_input("Time", value=st.session_state.selected_time or datetime.now().time(), key="time_input")
     st.session_state.selected_time = accident_time
     
     accident_dt = datetime.combine(accident_date, accident_time)
@@ -243,7 +243,7 @@ with col_time:
 st.markdown("---")
 st.markdown('<h3 style="margin-bottom:0.3rem"> Weather Conditions</h3>',
             unsafe_allow_html=True)
-st.caption("Automatically fetched for the accident location once coordinates are entered.")
+st.caption("Automatically fetched from the accident location once coordinates are entered.")
 w_col1, w_col2 = st.columns(2)
 
 with w_col1:
