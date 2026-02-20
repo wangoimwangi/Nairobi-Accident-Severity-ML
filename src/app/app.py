@@ -19,7 +19,6 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import pytz
-n# Nairobi timezone for consistent time handling
 NAIROBI_TZ = pytz.timezone("Africa/Nairobi")
 import plotly.graph_objects as go
 import plotly.express as px
